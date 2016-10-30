@@ -27,6 +27,8 @@ import com.pileproject.drivecommand.model.nxt.NxtMachine;
 import com.pileproject.drivecommand.model.nxt.port.NxtInputPort;
 import com.pileproject.drivecommand.model.nxt.port.NxtOutputPort;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -243,13 +245,10 @@ public class NxtController implements MachineController {
      * particularly for Android activities
      */
     public static final class SensorProperty {
-        public static List<String> getAllSensors() {
-            List<String> sensors = new LinkedList<>();
-            sensors.add(TOUCH);
-            sensors.add(SOUND);
-            sensors.add(LINE);
-            return sensors;
-        }
+
+        public static final List<String> ALL_SENSOR_NAMES = Collections.unmodifiableList(
+                Arrays.asList(TOUCH, SOUND, LINE)
+        );
 
         public static final class LineSensor {
             public static final int PctMin = 0;
@@ -267,11 +266,9 @@ public class NxtController implements MachineController {
      * particularly for Android activities
      */
     public static final class MotorProperty {
-        public static List<String> getAllMotors() {
-            List<String> motors = new LinkedList<>();
-            motors.add(LEFT);
-            motors.add(RIGHT);
-            return motors;
-        }
+
+        public static final List<String> ALL_MOTOR_NAMES = Collections.unmodifiableList(
+                Arrays.asList(LEFT, RIGHT)
+        );
     }
 }

@@ -77,12 +77,11 @@ public class NxtPortConnectionFragment extends DialogFragment {
         sensorsInUsed.add(loadSensor(R.id.setting_portconfig_sensorPort3, preferences.getInputPort3()));
         sensorsInUsed.add(loadSensor(R.id.setting_portconfig_sensorPort4, preferences.getInputPort4()));
 
-        List<String> allSensors = NxtController.SensorProperty.getAllSensors();
         int index = 0;
         final int[] sensorPlaceIds = {
                 R.id.setting_portconfig_sensor1, R.id.setting_portconfig_sensor2, R.id.setting_portconfig_sensor3,
         };
-        for (String sensorType : allSensors) {
+        for (String sensorType : NxtController.SensorProperty.ALL_SENSOR_NAMES) {
             if (sensorsInUsed.contains(sensorType)) continue;
             // set an unconnected sensor into a open space
             ((PortTextViewBase) mRootView.findViewById(sensorPlaceIds[index++])).setDeviceType(sensorType);
@@ -105,12 +104,11 @@ public class NxtPortConnectionFragment extends DialogFragment {
         motorsInUsed.add(loadMotor(R.id.setting_portconfig_motorPortB, preferences.getOutputPortB()));
         motorsInUsed.add(loadMotor(R.id.setting_portconfig_motorPortC, preferences.getOutputPortC()));
 
-        List<String> allMotors = NxtController.MotorProperty.getAllMotors();
         int index = 0;
         final int[] motorPlaceIds = {
                 R.id.setting_portconfig_motor1, R.id.setting_portconfig_motor2,
         };
-        for (String motorType : allMotors) {
+        for (String motorType : NxtController.MotorProperty.ALL_MOTOR_NAMES) {
             if (motorsInUsed.contains(motorType)) continue;
             // set an unconnected motor into an open space
             ((PortTextViewBase) mRootView.findViewById(motorPlaceIds[index++])).setDeviceType(motorType);
