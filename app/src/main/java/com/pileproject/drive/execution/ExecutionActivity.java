@@ -102,7 +102,9 @@ public class ExecutionActivity extends AppCompatActivity implements AlertDialogF
 
         CommunicatorProvider communicatorProvider = BluetoothCommunicatorProvider.getInstance();
 
-        mMachine = mMachineProvider.getMachine(communicatorProvider.getCommunicator());
+        mMachine = (DeployUtils.isOnEmulator())
+                ? mMachineProvider.getMachineSimulator()
+                : mMachineProvider.getMachine(communicatorProvider.getCommunicator());
 
         mObservableProgram = new RxObservableProgram(
                 ProgramDataManager.getInstance().loadExecutionProgram(),

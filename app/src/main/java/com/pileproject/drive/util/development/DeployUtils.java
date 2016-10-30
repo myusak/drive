@@ -27,6 +27,10 @@ import android.os.Build;
  */
 public class DeployUtils {
 
+    private static int isOnEmulatorScore = -1;
+
+    private static final int SCORE_MAYBE_ON_EMULATOR = 3;
+
     private DeployUtils() {
         throw new AssertionError("This class cannot be instantiated");
     }
@@ -35,8 +39,57 @@ public class DeployUtils {
      * Return true if the device is emulator.
      */
     public static boolean isOnEmulator() {
-        // from http://stackoverflow.com/questions/2799097/how-can-i-detect-when-an-android-application-is-running-in-the-emulator
-        return Build.HARDWARE.contains("goldfish");
+
+        if (isOnEmulatorScore != -1) {
+            return isOnEmulatorScore >= SCORE_MAYBE_ON_EMULATOR;
+        }
+
+        int score = 0;
+
+        if(Build.PRODUCT.equals("sdk") ||
+                Build.PRODUCT.equals("google_sdk") ||
+                Build.PRODUCT.equals("sdk_x86") ||
+                Build.PRODUCT.equals("vbox86p")) {
+            score ++;
+        }
+
+        if(Build.MANUFACTURER.equals("unknown") ||
+                Build.MANUFACTURER.equals("Genymotion")) {
+            score ++;
+        }
+
+        if(Build.BRAND.equals("generic") ||
+                Build.BRAND.equals("generic_x86")) {
+            score ++;
+        }
+
+        if(Build.DEVICE.equals("generic") ||
+                Build.DEVICE.equals("generic_x86") ||
+                Build.DEVICE.equals("vbox86p")) {
+            score ++;
+        }
+
+        if(Build.MODEL.equals("sdk") ||
+                Build.MODEL.equals("google_sdk") ||
+                Build.MODEL.equals("Android SDK built for x86")) {
+            score ++;
+        }
+
+        if(Build.HARDWARE.equals("goldfish") ||
+                Build.HARDWARE.equals("vbox86")) {
+            score ++;
+        }
+
+        if(Build.FINGERPRINT.contains("generic/sdk/generic") ||
+                Build.FINGERPRINT.contains("generic_x86/sdk_x86/generic_x86") ||
+                Build.FINGERPRINT.contains("generic/google_sdk/generic") ||
+                Build.FINGERPRINT.contains("generic/vbox86p/vbox86p")) {
+            score ++;
+        }
+
+        isOnEmulatorScore = score;
+
+        return isOnEmulatorScore >= SCORE_MAYBE_ON_EMULATOR;
     }
 
     /**

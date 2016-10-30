@@ -95,7 +95,7 @@ public class BluetoothCommunicator implements ICommunicator {
     }
 
     @Override
-    public void write(byte[] request, int timeout) throws RuntimeException {
+    public void write(byte[] request) throws RuntimeException {
         // TODO:use timeout
         try {
             mOutputStream.write(request);
@@ -105,7 +105,7 @@ public class BluetoothCommunicator implements ICommunicator {
     }
 
     @Override
-    public byte[] read(int length, int timeout) throws RuntimeException {
+    public byte[] read(int length) throws RuntimeException {
         // TODO:use timeout
         byte[] buffer = new byte[length];
         int numBytes;

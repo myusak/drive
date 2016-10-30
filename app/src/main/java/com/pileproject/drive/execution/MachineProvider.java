@@ -35,6 +35,8 @@ public interface MachineProvider {
      */
     MachineBase getMachine(ICommunicator communicator);
 
+    MachineBase getMachineSimulator();
+
     /**
      * Returns a concrete machine controller for the given machine.
      *

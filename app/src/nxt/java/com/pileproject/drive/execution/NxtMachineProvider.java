@@ -19,12 +19,18 @@ package com.pileproject.drive.execution;
 import com.pileproject.drivecommand.machine.MachineBase;
 import com.pileproject.drivecommand.model.com.ICommunicator;
 import com.pileproject.drivecommand.model.nxt.NxtMachine;
+import com.pileproject.drivecommand.model.nxt.NxtMachineSimulator;
 
 public class NxtMachineProvider implements MachineProvider {
 
     @Override
     public MachineBase getMachine(ICommunicator communicator) {
         return new NxtMachine(communicator);
+    }
+
+    @Override
+    public MachineBase getMachineSimulator() {
+        return new NxtMachineSimulator();
     }
 
     @Override
